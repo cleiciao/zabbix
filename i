@@ -1,0 +1,50 @@
+#Processo de Instalação do Zabbix 5.4
+
+
+Primeiramente vamos atualizar o Sitema Operacional
+
+  apt -y update && apt ugrade
+
+
+
+Instalação do SGBD
+
+  apt install -y mariadb-server mariadb-client
+ 
+ Criação do Banco
+   mysql -uroot -p
+   create database zabbix character set utf8 collate utf8_bin;
+   create user zabbix@localhost identified by 'password';
+   grant all privileges on zabbix.* to zabbix@localhost;
+   quit;
+
+
+
+Instalação do Repositório do Zabbix
+  wget https://repo.zabbix.com/zabbix/5.4/debian/pool/main/z/zabbix-release/zabbix-release_5.4-1+debian11_all.deb
+  dpkg -i zabbix-release_5.4-1+debian11_all.deb 
+  apt update
+  
+  
+Instalação do Zabbix server, frontend, agent
+ apt install -y zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent  
+  
+Populando o banco do Zabbix criado anteriormente.
+
+zcat /usr/share/doc/zabbix-sql-scripts/mysql/create.sql.gz | mysql -uzabbix -p zabbix
+
+Precisamos configurar o arquivo: /etc/zabbix/zabbix_server.conf e inserir a senha criado para usuario do banco de dados
+
+  vi /etc/zabbix/zabbix_server.conf
+
+  DBPassword=password
+  
+  
+Após todas as instalações feitas agora iremos iniciar e habilitar os serviços do zabbix. 
+
+ systemctl restart zabbix-server zabbix-agent apache2
+ systemctl enable zabbix-server zabbix-agent apache2
+
+Com Zabbix instalado agora podemos acessar o nosso navegador http://ipdoservidorzabbix/zabbix
+
+  
