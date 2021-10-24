@@ -37,3 +37,21 @@ Vamos startar os serviços do Proxy
 
 systemctl restart zabbix-proxy zabbix-agent
 systemctl enable zabbix-proxy zabbix-agent
+
+
+
+Configuração do arquivo do Zabbix Proxy para comunicação com o Banco e com o Zabbix Server.
+
+vi /etc/zabbix/zabbix_proxy.conf
+Hostname=proxy
+DBName=proxy
+DBUSer=user
+DBPassword=password
+
+
+Reiniciando Serviços
+
+systemctl restart zabbix-proxy
+systemctl status zabbix-proxy
+
+
