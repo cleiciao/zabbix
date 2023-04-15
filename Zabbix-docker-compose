@@ -1,0 +1,19 @@
+Procedimento de deploy das aplicações Zabbix, Grafana e NPM (NGINX PROXY MANAGER) com docker-compose.
+
+Antes de iniarmos o deploy das aplicações iremos verificar se temos o docker e docker compose instalados em nosso sistema.
+Para isso usamos os comandos:
+docker --version e docker-compose --version 
+Caso as aplicações estejam instalados você terá um retorno de qual versão esta rodando no sistema
+
+Ex: root@docker:~# docker --version 
+Docker version 20.10.5+dfsg1, build 55c4c88
+
+root@docker:~# docker-compose --version
+docker-compose version 1.25.0
+
+
+Caso você tenha acabado de instalar o sistema, será necessário instalar essas aplicações para realizar os passos seguintes.
+Você pode seguir a própria documentação do docker para realizar a instalção:
+https://docs.docker.com/engine/install/ubuntu/
+
+
